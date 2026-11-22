@@ -1,0 +1,92 @@
+def calculator():
+    print("=== Інтерактивний калькулятор ===")
+    print("Формат: число оператор число (наприклад: 5 + 3)")
+    print("Оператори: +, -, *, /, //, %, **")
+    print("Команди: 'quit' - вихід, 'history' - історія.")
+
+    history = []
+
+    while True:
+        user_input = input("\n> ").strip()
+
+        if user_input.lower() == "quit":
+            print("Вихід з калькулятора.")
+            break
+
+        if user_input.lower() == "history":
+            print("\n--- Історія обчислень ---")
+
+            if not history:
+                print("Історія порожня.")
+            else:
+                for idx, record in enumerate(history, 1):
+                    print(f"{idx}. {record}")
+
+            continue
+
+        if not user_input:
+            continue
+
+        parts = user_input.split()
+
+        if len(parts) != 3:
+            print("Помилка: некоректний формат.")
+            print("Введіть два числа та оператор через пробіл.")
+            continue
+
+        str_num1, op, str_num2 = parts
+
+        try:
+            num1 = float(str_num1)
+            num2 = float(str_num2)
+        except ValueError:
+            print("Помилка: операнди повинні бути числами.")
+            continue
+
+        result = None
+
+        if op == "+":
+            result = num1 + num2
+
+        elif op == "-":
+            result = num1 - num2
+
+        elif op == "*":
+            result = num1 * num2
+
+        elif op == "/":
+            if num2 == 0:
+                print("Помилка: ділення на нуль!")
+                continue
+            result = num1 / num2
+
+        elif op == "//":
+            if num2 == 0:
+                print("Помилка: ділення на нуль!")
+                continue
+            result = num1 // num2
+
+        elif op == "%":
+            if num2 == 0:
+                print("Помилка: ділення на нуль!")
+                continue
+            result = num1 % num2
+
+        elif op == "**":
+            result = num1 ** num2
+
+        else:
+            print(f"Помилка: невідомий оператор '{op}'.")
+            continue
+
+        if isinstance(result, float) and result.is_integer():
+            result = int(result)
+
+        print(f"Результат: {result}")
+
+        record = f"{num1} {op} {num2} = {result}"
+        history.append(record)
+
+
+if __name__ == "__main__":
+    calculator()
