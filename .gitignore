@@ -1,0 +1,23 @@
+# Віртуальні середовища
+venv/
+.venv/
+env/
+
+# Кеш Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Файли середовища та секрети
+.env
+.env.*
+!.env.example
+*.key
+
+# Налаштування редакторів
+.vscode/
+.idea/
+
+# Системні файли
+.DS_Store
+Thumbs.db
